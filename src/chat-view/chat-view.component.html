@@ -1,3 +1,18 @@
-<div>
-    Hello from chat view!
+<div class="major-block">
+    <div class="bottom-block p-3">
+        <div *ngFor="let message of messages" class="speech-bubble shadow py-2 px-3 mb-4" [class.me]="message.isMe">
+            {{message.text}}
+        </div>
+    </div>
+</div>
+<div class="input-block border-top px-4 py-3">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control round-input pr-5 mr-2" placeholder="Type a message here..." aria-label="Recipient's username"
+            aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button mat-fab class="test">
+                <fa name="paper-plane" size="lg"></fa>
+            </button>
+        </div>
+    </div>
 </div>

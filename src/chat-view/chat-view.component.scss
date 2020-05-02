@@ -1,0 +1,76 @@
+@import '../variables.scss';
+
+.bottom-block {
+    position: absolute;
+    bottom: 0;
+}
+.speech-bubble {
+    position: relative;
+    max-width: 600px;
+    width: fit-content;
+	background-color: $light-text-color;
+	border-radius: 2rem;
+}
+
+.speech-bubble.me {
+    background-color: $base-active-color;
+    color: $light-text-color;
+    // margin-left: auto;
+    // margin-right: 0;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 2.2em;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top-color: $light-text-color;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+    margin-bottom: -10px;
+}
+
+ .speech-bubble.me:after {
+//     right: 2.2em;
+//     left: auto;
+// 	width: 0;
+// 	height: 0;
+// 	border: 15px solid transparent;
+ 	border-top-color: $base-active-color;
+//     border-bottom: 0;
+// 	border-right: 0;
+// 	margin-left: -10px;
+// 	margin-bottom: -15px;
+ }
+
+ .input-block {
+     height: 75px;
+ }
+ .major-block {
+    height: calc(100% - 75px);
+    width: 100%;
+    position: relative;
+ }
+ .round-input {
+    border-radius: 3em;
+    height: 3em;
+    background-color: #f5f3f3;
+    border-color: #f5f3f3;
+ }
+
+ .round-input:focus {
+     z-index: auto !important;
+ }
+ .test {
+     background-color: $base-active-color;
+     position: absolute;
+     right: -5px;
+     top: -5px;
+ }
+ ::ng-deep .mat-fab .mat-button-wrapper {
+     padding-right: 5px !important;
+ }
