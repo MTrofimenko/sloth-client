@@ -35,3 +35,8 @@ body {
     color: $base-light-color;
     opacity: 1; /* Firefox */
 }
+
+.bottom-block {
+    position: absolute;
+    bottom: 0;
+}

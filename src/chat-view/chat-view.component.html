@@ -1,8 +1,14 @@
 <div class="major-block">
     <div class="bottom-block p-3">
-        <div *ngFor="let message of messages" class="speech-bubble shadow py-2 px-3 mb-4" [class.me]="message.isMe">
-            {{message.text}}
+        <div *ngFor="let message of messages" class="mb-2">
+            <div class="speech-bubble shadow py-2 px-3" [class.me]="message.isMe">
+                {{message.text}}
+            </div>
+            <div>
+                <span class="muted ml-4 light-text">{{message.sendDate}}</span>
+            </div>
         </div>
+
     </div>
 </div>
 <div class="input-block border-top px-4 py-3">
