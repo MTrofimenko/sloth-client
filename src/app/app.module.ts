@@ -1,3 +1,5 @@
+import { ChatViewMessageSectionComponent } from './../chat-view-message-section/chat-view-message-section.component';
+import { ChatViewContactSectionComponent } from './../chat-view-contact-section/chat-view-contact-section.component';
 import { ChatSearchInputComponent } from './../chat-search-input/chat-search-input.component';
 import { ChatMessageInputComponent } from './../chat-message-input/chat-message-input.component';
 import { ChatSideBarComponent } from './../chat-side-bar/chat-side-bar.component';
@@ -11,12 +13,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
-    AppComponent, ChatLayoutComponent, ChatListComponent, ChatViewComponent, ChatSideBarComponent, ChatMessageInputComponent, ChatSearchInputComponent
+    AppComponent,
+    ChatLayoutComponent,
+    ChatListComponent,
+    ChatViewComponent,
+    ChatSideBarComponent,
+    ChatMessageInputComponent,
+    ChatSearchInputComponent,
+    ChatViewContactSectionComponent,
+    ChatViewMessageSectionComponent
   ],
   imports: [
     BrowserModule,
