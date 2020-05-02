@@ -1,3 +1,17 @@
+<div class="contact-section border-bottom">
+    <div class="d-flex justify-content-between p-3">
+        <div class="d-flex flex-column">
+            <h6 class="mb-0 font-weight-bold">Yurii Shevchuk</h6>
+            <!-- {{chat.name}} -->
+            <small class="small muted">3 minutes ago</small>
+            <!-- {{chat.lastDate}} -->
+        </div>
+        <div class="d-flex align-items-center mr-4">
+            <fa name="ellipsis-h" size="lg" class="muted"></fa>
+        </div>
+    </div>
+
+</div>
 <div class="major-block">
     <div class="bottom-block p-3">
         <div *ngFor="let message of messages" class="mb-2">
@@ -11,14 +25,6 @@
 
     </div>
 </div>
-<div class="input-block border-top px-4 py-3">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control round-input pr-5 mr-2" placeholder="Type a message here..." aria-label="Recipient's username"
-            aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <button mat-fab class="test">
-                <fa name="paper-plane" size="lg"></fa>
-            </button>
-        </div>
-    </div>
+<div class="border-top px-4 py-3">
+    <chat-message-input></chat-message-input>
 </div>

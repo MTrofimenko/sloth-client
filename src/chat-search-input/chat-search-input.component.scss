@@ -1,0 +1,42 @@
+@import '../variables.scss';
+
+.input-block {
+    height: 75px;
+}
+ .round-input {
+    border-radius: 3em;
+    height: 3em;
+    background-color: $input-color;
+    border-color: $input-color;
+ }
+
+ .new-btn {
+    background-color: $base-active-color;
+    height: 30px;
+    width: 30px;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    line-height: 18px;
+    overflow: visible;
+    min-width: 0;
+    border-radius: 50%;
+    padding: 0;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+.search {
+    width: 300px;
+}
+.input-group-append {
+    align-items: center;
+    justify-content: center;
+}

@@ -1,3 +1,5 @@
+import { ChatSearchInputComponent } from './../chat-search-input/chat-search-input.component';
+import { ChatMessageInputComponent } from './../chat-message-input/chat-message-input.component';
 import { ChatSideBarComponent } from './../chat-side-bar/chat-side-bar.component';
 import { ChatViewComponent } from './../chat-view/chat-view.component';
 import { ChatListComponent } from './../chat-list/chat-list.component';
@@ -14,7 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
-    AppComponent, ChatLayoutComponent, ChatListComponent, ChatViewComponent, ChatSideBarComponent
+    AppComponent, ChatLayoutComponent, ChatListComponent, ChatViewComponent, ChatSideBarComponent, ChatMessageInputComponent, ChatSearchInputComponent
   ],
   imports: [
     BrowserModule,

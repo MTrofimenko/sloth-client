@@ -43,32 +43,11 @@
 // 	margin-bottom: -15px;
  }
 
- .input-block {
-     height: 75px;
- }
+ 
  .major-block {
-    height: calc(100% - 75px);
+    height: calc(100% - 150px);
     width: 100%;
     position: relative;
- }
- .round-input {
-    border-radius: 3em;
-    height: 3em;
-    background-color: #f5f3f3;
-    border-color: #f5f3f3;
- }
-
- .round-input:focus {
-     z-index: auto !important;
- }
- .test {
-     background-color: $base-active-color;
-     position: absolute;
-     right: -5px;
-     top: -5px;
- }
- ::ng-deep .mat-fab .mat-button-wrapper {
-     padding-right: 5px !important;
  }
 
  .light-text {

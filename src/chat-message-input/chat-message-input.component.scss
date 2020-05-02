@@ -1,0 +1,22 @@
+@import '../variables.scss';
+
+ .round-input {
+    border-radius: 3em;
+    height: 3em;
+    background-color: $input-color;
+    border-color: $input-color;
+ }
+
+ .round-input:focus {
+     z-index: auto !important;
+ }
+
+ .send-btn {
+    background-color: $base-active-color;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+}
+::ng-deep .send-btn .mat-fab .mat-button-wrapper {
+    padding-right: 5px !important;
+}
