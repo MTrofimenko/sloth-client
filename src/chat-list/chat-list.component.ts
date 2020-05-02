@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'chat-list',
@@ -6,24 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./chat-list.component.scss']
 })
 export class ChatListComponent {
-  chats = [
-    {
-      name: "Maria Mieshkova",
-      lastMessage:"Glad to see you in our chat!",
-      lastDate: "21 Aug",
-      isCurrent: false
-    },
-    {
-      name: "Yurii Shevchuk",
-      lastMessage:"Glad to see you in our chat!",
-      lastDate: "2 Aug",
-      isCurrent: true,
-    },
-    {
-      name: "Marharyta Trofymenko",
-      lastMessage:"Let's discuss it tomorrow!",
-      lastDate: "21 Aug",
-      isCurrent: false
-    }
-  ]
+  @Input() chats;
+
+  @Output() acceptChat = new EventEmitter();
+  @Output() declineChat = new EventEmitter();
+
+
+  public onAcceptChat() {
+    this.acceptChat.emit();
+  }
+
+  public onDeclineChat() {
+    this.declineChat.emit();
+  }
 }

@@ -1,3 +1,4 @@
+import { ChatListSectionComponent } from './../chat-list-section/chat-list-section.component';
 import { ChatViewMessageSectionComponent } from './../chat-view-message-section/chat-view-message-section.component';
 import { ChatViewContactSectionComponent } from './../chat-view-contact-section/chat-view-contact-section.component';
 import { ChatSearchInputComponent } from './../chat-search-input/chat-search-input.component';
@@ -26,7 +27,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ChatMessageInputComponent,
     ChatSearchInputComponent,
     ChatViewContactSectionComponent,
-    ChatViewMessageSectionComponent
+    ChatViewMessageSectionComponent,
+    ChatListSectionComponent
   ],
   imports: [
     BrowserModule,
