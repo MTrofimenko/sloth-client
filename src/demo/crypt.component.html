@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Alice</h4>
+      <div class="send-section">
+        <span>Send Message</span>
+        <input type="text" [(ngModel)]="aliceMsg" />
+        <button (click)="sendMessage(false)">Send</button>
+        <div class="send-result"> {{aliceEncMsg}} </div>
+      </div>
+
+      <div class="get-section">
+        <input type="text" [(ngModel)]="aliceGetMsg" />
+        <button (click)="getMessage(false)">Decode</button>
+        <div class="get-result"> {{aliceGetEncMsg}} </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Bob</h4>
+      <div class="send-section">
+        <span>Send Message</span>
+        <input type="text" [(ngModel)]="bobMsg" />
+        <button (click)="sendMessage(true)">Send</button>
+        <div class="send-result"> {{bobEncMsg}} </div>
+      </div>
+
+      <div class="get-section">
+        <input type="text" [(ngModel)]="bobGetMsg" />
+        <button (click)="getMessage(true)">Decode</button>
+        <div class="get-result"> {{bobGetEncMsg}} </div>
+      </div>
+    </div>
+  </div>
+</div>
