@@ -1,1 +1,49 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~font-awesome/css/font-awesome.css';
+@import '~@angular/material/theming';
+@import './variables.scss';
+
+@include mat-core();
+
+
+$sloth-client-primary: mat-palette($mat-indigo);
+$sloth-client-accent: mat-palette($mat-pink, A200, A100, A400);
+$sloth-client-warn: mat-palette($mat-red);
+$sloth-client-theme: mat-light-theme($sloth-client-primary, $sloth-client-accent, $sloth-client-warn);
+
+@include angular-material-theme($sloth-client-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%;
+    max-width: 100%;
+    overflow-x: hidden; 
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    background: #fcfcfc;
+}
+.muted {
+    color: $base-light-color;
+}
+
+::placeholder {
+    color: $base-light-color;
+    opacity: 1; /* Firefox */
+}
+
+.bottom-block {
+    position: absolute;
+    bottom: 0;
+}
+.form-control:focus {
+    box-shadow: none;
+}
+.input-group>.form-control:not(:last-child) {
+    border-top-right-radius: 3em;
+    border-bottom-right-radius: 3em;
+}

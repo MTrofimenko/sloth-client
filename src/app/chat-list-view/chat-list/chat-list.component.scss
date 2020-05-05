@@ -1,0 +1,14 @@
+@import '../../../variables.scss';
+
+.list-group-item.active {
+    background-color: $base-dark-color;
+    border-color: $base-dark-color;
+    border-left: 4px solid $base-active-color;
+    color: white;
+}
+.list-group-item-action {
+    color: $base-dark-color;
+}
+.chat-list-icon:hover {
+    color: $base-active-color;
+}

@@ -1,0 +1,13 @@
+@import '../../variables.scss';
+
+.user-icon {
+    margin: 0 auto;
+}
+
+.setting-icon {
+    color: $icon-color;
+}
+.setting-icon:hover {
+    color: $icon-hover-color;
+    cursor: pointer;
+}

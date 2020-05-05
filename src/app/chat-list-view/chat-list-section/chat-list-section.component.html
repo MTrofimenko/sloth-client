@@ -1,0 +1,10 @@
+<div class="mt-4">
+    <div class="mt-2">
+        <h6 class="font-weight-bold pl-2">Pending</h6>
+        <chat-list [chats]="pendingChats" (acceptChat)="acceptChat()" (declineChat)="declineChat()"></chat-list>
+    </div>
+    <div class="pt-4">
+        <h6 class="font-weight-bold pl-2">Active</h6>
+        <chat-list [chats]="activeChats"></chat-list>
+    </div>
+</div>
