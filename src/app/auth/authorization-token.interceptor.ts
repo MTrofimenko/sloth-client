@@ -1,9 +1,9 @@
 import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest
-  } from '@angular/common/http';
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest
+    } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './services/authentication.service';
@@ -14,10 +14,10 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const authToken = this.authenticationService.authTokenValue;
-        if (authToken && authToken.token) {
+        if (authToken && authToken.accessToken) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${authToken.token}`
+                    Authorization: `${authToken.accessToken}` // TODO Bearer
                 }
             });
         }

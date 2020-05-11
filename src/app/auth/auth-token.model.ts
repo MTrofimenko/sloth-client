@@ -1,3 +1,4 @@
 export class AuthToken {
-  token?: string;
+  login: string;
+  accessToken?: string;
 }
