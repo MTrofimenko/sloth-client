@@ -1,48 +1,41 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from '../chat-list-view.reducer';
+import {
+  requestChats,
+  selectChat,
+  acceptChat,
+  declineChat,
+} from '../chat-list-view.actions';
+import {
+  selectPendingChatTiles,
+  selectActiveChatTiles,
+} from '../chat-list-view.selectors';
 
 @Component({
-    selector: 'chat-list-section',
-    templateUrl: './chat-list-section.component.html'
+  selector: 'chat-list-section',
+  templateUrl: './chat-list-section.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatListSectionComponent {
-    pendingChats = [
-        {
-            name: "Maria Mieshkova",
-            lastMessage: "Glad to see you in our chat!",
-            lastDate: "21 Aug",
-            isCurrent: false,
-            isPending: true
-        },
-        {
-            name: "Marharyta Trofymenko",
-            lastMessage: "Let's discuss it tomorrow!",
-            lastDate: "21 Aug",
-            isCurrent: false,
-            isPending: true
-        }
-    ];
-    activeChats = [
-        {
-            name: "Yurii Shevchuk",
-            lastMessage: "Glad to see you in our chat!",
-            lastDate: "2 Aug",
-            isCurrent: true,
-            isPending: false
-        },
-        {
-            name: "Dr. Strange",
-            lastMessage: "Glad to see you in our chat!",
-            lastDate: "2 Aug",
-            isCurrent: false,
-            isPending: false
-        }
-    ];
+export class ChatListSectionComponent implements OnInit {
+  constructor(private store: Store<State>) {}
 
-    public acceptChat() {
-        // TODO
-    }
-    
-    public declineChat() {
-        // TODO
-    }
+  activeChats$ = this.store.select(selectActiveChatTiles);
+  pendingChats$ = this.store.select(selectPendingChatTiles);
+
+  ngOnInit() {
+    this.store.dispatch(requestChats());
+  }
+
+  public selectChat(chatId: string) {
+    this.store.dispatch(selectChat({ chatId }));
+  }
+
+  public acceptChat(chatId: string) {
+    this.store.dispatch(acceptChat({ chatId }));
+  }
+
+  public declineChat(chatId: string) {
+    this.store.dispatch(declineChat({ chatId }));
+  }
 }
