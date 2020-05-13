@@ -1,24 +1,32 @@
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { MatButtonModule } from '@angular/material/button';
-import { ChatViewComponent } from './chat-view.component';
-import { ChatViewMessageSectionComponent } from './chat-view-message-section/chat-view-message-section.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ChatViewContactSectionComponent } from './chat-view-contact-section/chat-view-contact-section.component';
+import { MatButtonModule } from '@angular/material/button';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ChatMessageInputComponent } from './chat-message-input/chat-message-input.component';
+import { ChatViewContactSectionComponent } from './chat-view-contact-section/chat-view-contact-section.component';
+import { ChatViewMessageSectionComponent } from './chat-view-message-section/chat-view-message-section.component';
+import { ChatViewComponent } from './chat-view.component';
+import { ChatMessagesEffects } from './chat-view.effects';
+import { ChatMessagesFeatureKey, reducer } from './chat-view.reducer';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [
-        ChatViewMessageSectionComponent,
-        ChatViewContactSectionComponent,
-        ChatMessageInputComponent,
-        ChatViewComponent
-    ],
-    exports: [ChatViewComponent],
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        AngularFontAwesomeModule
-    ]
+  declarations: [
+    ChatViewMessageSectionComponent,
+    ChatViewContactSectionComponent,
+    ChatMessageInputComponent,
+    ChatViewComponent,
+  ],
+  exports: [ChatViewComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    AngularFontAwesomeModule,
+    FormsModule,
+    StoreModule.forFeature(ChatMessagesFeatureKey, reducer),
+    EffectsModule.forFeature([ChatMessagesEffects]),
+  ],
 })
-export class ChatViewModule { }
+export class ChatViewModule {}

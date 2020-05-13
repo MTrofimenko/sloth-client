@@ -1,6 +1,8 @@
-<div *ngFor="let message of messages" class="mb-2">
-    <div class="speech-bubble shadow py-2 px-3" [class.me]="message.isMe">
-        {{message.text}}
+<ng-container *ngIf="currentUserId">
+  <div *ngFor="let message of messages" class="mb-2">
+    <div class="speech-bubble shadow py-2 px-3" [class.me]="message.userId === currentUserId">
+      {{message.message}}
     </div>
-    <span class="muted ml-4 light-text">{{message.sendDate}}</span>
-</div>
+    <span class="muted ml-4 light-text">{{message.sendDate | date }}</span>
+  </div>
+</ng-container>
