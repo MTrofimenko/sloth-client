@@ -54,7 +54,7 @@ export class ChatEffects {
       switchMap(([action, chats, userId]) => {
         const publicKey = 'ABC'; // TODO: generate public key for chat
 
-        return this.chatService.confirmChat(action.chatId, publicKey).pipe(
+        return this.chatService.acceptChat(action.chatId, publicKey).pipe(
           map(() => {
             const chat = chats.find((x) => x.id === action.chatId);
             const member = chat.members.find((y) => y.userId === userId);

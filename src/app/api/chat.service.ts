@@ -26,9 +26,9 @@ export class ChatService {
     );
   }
 
-  confirmChat(chatId: string, publicKey: string) {
+  acceptChat(chatId: string, publicKey: string) {
     return this.http.post(
-      `${AppSettings.apiUrl}${this.defaultRoute}/${chatId}/confirm`,
+      `${AppSettings.apiUrl}${this.defaultRoute}/${chatId}/accept`,
       { publicKey }
     );
   }
