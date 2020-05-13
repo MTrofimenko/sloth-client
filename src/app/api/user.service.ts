@@ -9,7 +9,7 @@ import { CurrentUser } from '../auth/auth.model';
 export class UserService {
   current() {
     return this.http.get<CurrentUser>(
-      `${AppSettings.apiUrl}/api/auth/current`
+      `${AppSettings.apiUrl}/api/user/current`
     );
   }
 
