@@ -20,14 +20,14 @@ export class ChatService {
   }
 
   createChat(request: CreateChatRequest) {
-    return this.http.post<string>(
+    return this.http.post<Chat>(
       `${AppSettings.apiUrl}${this.defaultRoute}`,
       request
     );
   }
 
   acceptChat(chatId: string, publicKey: string) {
-    return this.http.post(
+    return this.http.post<Chat>(
       `${AppSettings.apiUrl}${this.defaultRoute}/${chatId}/accept`,
       { publicKey }
     );

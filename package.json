@@ -28,6 +28,8 @@
     "@ngrx/store-devtools": "^8.6.0",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.4.1",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1",
     "font-awesome": "^4.7.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

@@ -18,7 +18,7 @@ export class ChatMessageService {
   }
 
   sendMessage(chatId: string, request: CreateChatMessageRequest) {
-    return this.http.post<string>(
+    return this.http.post<ChatMessage>(
       `${AppSettings.apiUrl}/api/${chatId}/chat-message`,
       request
     );
