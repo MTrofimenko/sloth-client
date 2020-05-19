@@ -30,4 +30,14 @@ export class KeyLocalStorageService implements KeyStorageService {
     localStorage.removeItem(`${this.chatPublicKey}-${chatId}`);
     localStorage.removeItem(`${this.chatSecretKey}-${chatId}`);
   }
+
+  removeAll(): void {
+    const chatKeys = Object
+    .keys(localStorage)
+    .filter(x => x.indexOf(this.chatPublicKey) >= 0 || x.indexOf(this.chatSecretKey) >= 0);
+
+    chatKeys.forEach(key => {
+      localStorage.removeItem(key);
+    });
+  }
 }

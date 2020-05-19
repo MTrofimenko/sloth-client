@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
+import { UserService } from '../api/user.service';
+import { KeyStorageService } from '../key-storage/key-storage.service';
+import { AuthenticationService } from './services/authentication.service';
 import {
   catchError,
   map,
@@ -18,9 +22,6 @@ import {
   loginFailed,
   loginComplete,
 } from './auth.actions';
-import { UserService } from '../api/user.service';
-import { AuthenticationService } from './services/authentication.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -47,6 +48,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(logout),
         tap(() => {
+          this.keyStorageService.removeAll();
           this.authService.logout();
           this.router.navigate(['/login']);
         })
@@ -69,6 +71,7 @@ export class AuthEffects {
     private actions$: Actions,
     private userService: UserService,
     private authService: AuthenticationService,
+    private keyStorageService: KeyStorageService,
     private router: Router,
     private route: ActivatedRoute
   ) {}

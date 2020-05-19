@@ -6,5 +6,7 @@ export abstract class KeyStorageService {
   abstract getKeyPairByChatId(chatId: string): KeyPair;
   abstract getSecretKeyByChatId(chatId: string): string;
   abstract setKeyPairByChatId(chatId: string, keyPair: KeyPair): void;
+
+  abstract removeAll(): void;
   abstract removeKeyPairByChatId(chatId: string): void;
 }

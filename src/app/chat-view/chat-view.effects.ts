@@ -43,12 +43,11 @@ export class ChatMessagesEffects {
     this.actions$.pipe(
       ofType(selectChat),
       withLatestFrom(
-        this.store.select(selectCurrentUserId),
         this.store
           .select(selectCurrentInterlocutorPublicKey)
           .pipe(filter((x) => !!x))
       ),
-      mergeMap(([action, userId, publicKey]) =>
+      mergeMap(([action, publicKey]) =>
         this.chatMessageService.loadAll(action.chatId).pipe(
           map((chatMessages) => {
             const secretKey = this.keyStorageService.getSecretKeyByChatId(
@@ -56,8 +55,7 @@ export class ChatMessagesEffects {
             );
             const decryptedMessages = this.decryptMessages(
               chatMessages,
-              { publicKey, secretKey },
-              userId
+              { publicKey, secretKey }
             );
             return loadChatMessages({ chatMessages: decryptedMessages });
           }),
@@ -72,7 +70,9 @@ export class ChatMessagesEffects {
       ofType(sendChatMessage),
       withLatestFrom(
         this.store.select(selectCurrentChatId),
-        this.store.select(selectCurrentInterlocutorPublicKey).pipe(filter((x) => !!x))
+        this.store
+          .select(selectCurrentInterlocutorPublicKey)
+          .pipe(filter((x) => !!x))
       ),
       switchMap(([action, chatId, publicKey]) => {
         const secretKey = this.keyStorageService.getSecretKeyByChatId(chatId);
@@ -84,10 +84,14 @@ export class ChatMessagesEffects {
         return this.chatMessageService
           .sendMessage(chatId, { message: encryptedMsg })
           .pipe(
-            map((chatMessage) => addChatMessage({ chatMessage: {
-              ...chatMessage,
-              message: action.message
-            } })),
+            map((chatMessage) =>
+              addChatMessage({
+                chatMessage: {
+                  ...chatMessage,
+                  message: action.message,
+                },
+              })
+            ),
             catchError(() => EMPTY)
           );
       })
@@ -96,18 +100,16 @@ export class ChatMessagesEffects {
 
   public decryptMessages(
     chatMessages: ChatMessage[],
-    keyPair: KeyPair,
-    userId: string
+    keyPair: KeyPair
   ) {
     const decryptedMessages = chatMessages.map((x) => {
       const decryptedMessage =
-        x.userId !== userId
-          ? this.cryptService.decryptMessage(
-              x.message,
-              keyPair.publicKey,
-              keyPair.secretKey
-            )
-          : 'Your message can\'t be decrypted';
+        this.cryptService.decryptMessage(
+          x.message,
+          keyPair.publicKey,
+          keyPair.secretKey
+        ) || 'Message can\'t be decrypted.';
+
       return {
         ...x,
         message: decryptedMessage,
