@@ -9,6 +9,7 @@ import { ChatEffects } from './chat-list-view.effects';
 import { ChatsFeatureKey, reducer } from './chat-list-view.reducer';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ChatSearchInputComponent } from './chat-search-input/chat-search-input.component';
+import { KeyStorageModule } from '../key-storage/key-storage.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ChatSearchInputComponent } from './chat-search-input/chat-search-input.
     CommonModule,
     MatButtonModule,
     AngularFontAwesomeModule,
+    KeyStorageModule,
     StoreModule.forFeature(ChatsFeatureKey, reducer),
     EffectsModule.forFeature([ChatEffects]),
   ],

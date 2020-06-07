@@ -1,9 +1,20 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Chat } from '../api/models/chat.model';
+import { KeyPair } from '../key-storage/key-pair.model';
 
 export const requestChats = createAction(
   '[Chat/API] Request Chats'
+);
+
+export const createChat = createAction(
+  '[Chat/API] Create Chat',
+  props<{ name: string, memberIds: string[] }>()
+);
+
+export const saveChatKeys = createAction(
+  '[Chat/API] Save Chat Keys',
+  props<{ chatId: string, keyPair: KeyPair }>()
 );
 
 export const acceptChat = createAction(

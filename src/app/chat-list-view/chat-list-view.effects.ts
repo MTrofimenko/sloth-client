@@ -3,16 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { ChatService } from '../api/chat.service';
-import { ChatMemberStatus, ChatStatus } from '../api/models/chat.model';
-import { selectCurrentUserId } from '../auth/auth.selectors';
 import { State } from './chat-list-view.reducer';
-import { selectAllChats } from './chat-list-view.selectors';
 import {
   catchError,
   map,
   mergeMap,
   switchMap,
-  withLatestFrom,
+  tap,
+  concatMap,
 } from 'rxjs/operators';
 import {
   requestChats,
@@ -22,13 +20,20 @@ import {
   upsertChat,
   declineChat,
   deleteChat,
+  createChat,
+  saveChatKeys,
+  addChat,
 } from './chat-list-view.actions';
+import { KeyStorageService } from '../key-storage/key-storage.service';
+import { CryptService } from '../crypt/crypt.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChatEffects {
   constructor(
     private actions$: Actions,
     private chatService: ChatService,
+    private storageService: KeyStorageService,
+    private cryptService: CryptService,
     private store: Store<State>
   ) {}
 
@@ -44,28 +49,37 @@ export class ChatEffects {
     )
   );
 
+  createChat$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createChat),
+      mergeMap(({ memberIds }) => {
+        const keyPair = this.cryptService.createKeyPair();
+
+        return this.chatService
+          .createChat({
+            name: '',
+            memberIds,
+            creatorPublicKey: keyPair.publicKey,
+          })
+          .pipe(
+            concatMap((chat) =>
+              of(saveChatKeys({ chatId: chat.id, keyPair }), addChat({ chat }))
+            ),
+            catchError(() => EMPTY)
+          );
+      })
+    )
+  );
+
   acceptChat$ = createEffect(() =>
     this.actions$.pipe(
       ofType(acceptChat),
-      withLatestFrom(
-        this.store.select(selectAllChats),
-        this.store.select(selectCurrentUserId)
-      ),
-      switchMap(([action, chats, userId]) => {
-        const publicKey = 'ABC'; // TODO: generate public key for chat
+      switchMap(({ chatId }) => {
+        const keyPair = this.cryptService.createKeyPair();
 
-        return this.chatService.acceptChat(action.chatId, publicKey).pipe(
-          map(() => {
-            const chat = chats.find((x) => x.id === action.chatId);
-            const member = chat.members.find((y) => y.userId === userId);
-            member.status = ChatMemberStatus.Active;
-
-            return upsertChat({
-              chat: {
-                ...chat,
-                status: ChatStatus.Active,
-              },
-            });
+        return this.chatService.acceptChat(chatId, keyPair.publicKey).pipe(
+          concatMap((chat) => {
+            return of(saveChatKeys({ chatId, keyPair }), upsertChat({ chat }));
           }),
           catchError(() => EMPTY)
         );
@@ -83,5 +97,16 @@ export class ChatEffects {
         );
       })
     )
+  );
+
+  saveChatKeys$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(saveChatKeys),
+        tap(({ chatId, keyPair }) => {
+          this.storageService.setKeyPairByChatId(chatId, keyPair);
+        })
+      ),
+    { dispatch: false }
   );
 }

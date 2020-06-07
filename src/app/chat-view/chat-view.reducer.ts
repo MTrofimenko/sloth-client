@@ -75,6 +75,3 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
-
-
-

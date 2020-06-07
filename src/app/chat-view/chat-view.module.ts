@@ -11,6 +11,7 @@ import { ChatViewComponent } from './chat-view.component';
 import { ChatMessagesEffects } from './chat-view.effects';
 import { ChatMessagesFeatureKey, reducer } from './chat-view.reducer';
 import { FormsModule } from '@angular/forms';
+import { KeyStorageModule } from '../key-storage/key-storage.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     AngularFontAwesomeModule,
     FormsModule,
+    KeyStorageModule,
     StoreModule.forFeature(ChatMessagesFeatureKey, reducer),
     EffectsModule.forFeature([ChatMessagesEffects]),
   ],
