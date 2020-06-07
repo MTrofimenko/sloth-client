@@ -1,19 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../appsettings';
-import { CurrentUser } from '../auth/auth.model';
+import { UserModel } from '../auth/auth.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   current() {
-    return this.http.get<CurrentUser>(
-      `${AppSettings.apiUrl}/api/user/current`
-    );
+    return this.http.get<UserModel>(`${AppSettings.apiUrl}/api/user/current`);
   }
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  getByName(namePart: string) {
+    return this.http.get<UserModel[]>(`${AppSettings.apiUrl}/api/user`, {
+      params: new HttpParams({
+        fromObject: { namePart },
+      }),
+    });
+  }
+
+  constructor(private http: HttpClient) {}
 }

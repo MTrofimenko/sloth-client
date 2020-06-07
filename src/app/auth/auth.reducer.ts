@@ -2,13 +2,13 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   loadCurrentUserComplete, loginComplete
 } from './auth.actions';
-import { CurrentUser } from './auth.model';
+import { UserModel } from './auth.model';
 import { AuthToken } from './auth-token.model';
 export const authFeatureKey = 'auth';
 
 export interface State {
   token: AuthToken;
-  user: CurrentUser;
+  user: UserModel;
 }
 
 export const initialState: State = {

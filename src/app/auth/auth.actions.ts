@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { CurrentUser } from './auth.model';
+import { UserModel } from './auth.model';
 import { AuthToken } from './auth-token.model';
 
 export const loadCurrentUserComplete = createAction(
   '[Auth] Load Current User Complete',
-  props<{ user: CurrentUser }>()
+  props<{ user: UserModel }>()
 );
 
 export const loadCurrentUserFailed = createAction(
