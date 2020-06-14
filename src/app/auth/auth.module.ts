@@ -9,6 +9,9 @@ import { authFeatureKey, reducer } from './auth.reducer';
 import { AuthorizationTokenInterceptor } from './authorization-token.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { ForbiddenRedirectInterceptor } from './forbidden-redirect.interceptor';
+import { LogonComponent } from './components/logon/logon.component';
+import { RouterModule } from '@angular/router';
+import { AuthNavigateComponent } from './components/auth-navigate/auth-navigate.component';
 
 @NgModule({
     imports: [
@@ -16,9 +19,10 @@ import { ForbiddenRedirectInterceptor } from './forbidden-redirect.interceptor';
         ReactiveFormsModule,
         HttpClientModule,
         StoreModule.forFeature(authFeatureKey, reducer),
-        EffectsModule.forFeature([AuthEffects])
+        EffectsModule.forFeature([AuthEffects]),
+        RouterModule
     ],
-    declarations: [LoginComponent],
+    declarations: [LoginComponent, LogonComponent, AuthNavigateComponent],
     exports: [LoginComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthorizationTokenInterceptor, multi: true },

@@ -6,12 +6,12 @@ import { login } from '../../auth.actions';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-  selector: 'auth-login',
-  templateUrl: './login.component.html',
-  styleUrls: ["./login.component.scss"]
+  selector: "auth-logon",
+  templateUrl: './logon.component.html',
+  styleUrls: ["./logon.component.scss"]
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class LogonComponent implements OnInit {
+  logonForm: FormGroup;
   loading = false;
   submitted = false;
   error = '';
@@ -29,20 +29,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.logonForm = this.formBuilder.group({
       username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
     });
   }
 
   get f() {
-    return this.loginForm.controls;
+    return this.logonForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
+    if (this.logonForm.invalid) {
       return;
     }
 
