@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { login } from '../../auth.actions';
+import { logon } from '../../auth.actions';
 import { AuthenticationService } from '../../services/authentication.service';
+import { RegisterModel } from '../../register.model';
 
 @Component({
   selector: "auth-logon",
@@ -30,6 +31,8 @@ export class LogonComponent implements OnInit {
 
   ngOnInit() {
     this.logonForm = this.formBuilder.group({
+      firstname:['', Validators.required],
+      lastname:['', Validators.required],
       username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -43,16 +46,21 @@ export class LogonComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     if (this.logonForm.invalid) {
       return;
     }
-
+    if (this.f.password.value != this.f.confirmPassword.value) {
+      this.error = 'Password confirm not valid'
+      return;
+    }
     this.store.dispatch(
-      login({
-        userName: this.f.username.value,
+      logon({registerModel: {
+        firstName: this.f.firstname.value,
+        lastName: this.f.lastname.value,
+        login: this.f.username.value,
         password: this.f.password.value,
-      })
+        email:this.f.email.value
+      }})
     );
   }
 }

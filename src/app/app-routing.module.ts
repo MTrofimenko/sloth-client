@@ -8,8 +8,6 @@ import { AuthNavigateComponent } from './auth/components/auth-navigate/auth-navi
 
 const routes: Routes = [
   { path: '', component: ChatLayoutComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'logon', component: LogonComponent },
   { path: 'auth', component: AuthNavigateComponent },
   { path: '**', redirectTo: '' }
 ];
