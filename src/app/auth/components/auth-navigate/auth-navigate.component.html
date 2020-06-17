@@ -1,0 +1,26 @@
+<div class="body-login h-100">
+  <div class="row">
+    <div class="col-md-3 mr-auto ml-auto">
+      <div class="panel panel-login">
+        <h1 class="mr-auto ml-auto p-3" >SLOTH</h1>
+        <div *ngIf="isLoginBlockVisible; then loginBlock else logonBlock"></div>
+        <ng-template #loginBlock><auth-login></auth-login></ng-template>
+        <ng-template #logonBlock><auth-logon></auth-logon></ng-template>
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-sm-6 tabs p-0">
+              <button name="Login" (click)="onTabClick(true)" class="activeTab p-0" id="login-tab-button">
+               <div class="p-3" [ngClass]="{'active-tab': isLoginBlockVisible}">LOGIN</div>
+              </button>
+            </div>
+            <div class="col-sm-6 tabs p-0">
+              <button name="Logon" (click)="onTabClick(false)" class="buttonTab p-0" id="register-tab-button">
+               <div class="p-3" [ngClass]="{'active-tab': !isLoginBlockVisible}">REGISTER</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

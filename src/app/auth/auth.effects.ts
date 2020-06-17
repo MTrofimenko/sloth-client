@@ -18,8 +18,10 @@ import {
   loadCurrentUserComplete,
   loadCurrentUserFailed,
   login,
+  logon,
   logout,
   loginFailed,
+  logonFailed,
   loginComplete,
 } from './auth.actions';
 
@@ -38,6 +40,20 @@ export class AuthEffects {
             return loginComplete({ token });
           }),
           catchError((error) => of(loginFailed({ error })))
+        );
+      })
+    )
+  );
+
+  logon$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(logon),
+      switchMap(({ registerModel }) => {
+        return this.authService.logon(registerModel).pipe(
+          map((userId) => {
+            return login({ userName: registerModel.login, password: registerModel.password });
+          }),
+          catchError((error) => of(logonFailed({ error })))
         );
       })
     )
