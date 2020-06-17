@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { AppSettings } from '../../appsettings';
 import { AuthToken } from '../auth-token.model';
 import { Constants } from '../auth.constants';
+import { RegisterModel } from '../register.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -22,10 +23,10 @@ export class AuthenticationService {
     return this.authTokenSubject.value;
   }
 
-  login(username: string, password: string) {
+  login(login: string, password: string) {
     return this.http
       .post<AuthToken>(`${AppSettings.apiUrl}/api/auth/login`, {
-        login: username,
+        login,
         password,
       })
       .pipe(
@@ -35,6 +36,11 @@ export class AuthenticationService {
           return authToken;
         })
       );
+  }
+
+  logon(model: RegisterModel) {
+    return this.http
+      .post<string>(`${AppSettings.apiUrl}/api/auth/logon`, model);
   }
 
   logout() {
