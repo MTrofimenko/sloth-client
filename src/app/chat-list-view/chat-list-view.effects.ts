@@ -52,13 +52,13 @@ export class ChatEffects {
   createChat$ = createEffect(() =>
     this.actions$.pipe(
       ofType(createChat),
-      mergeMap(({ memberIds }) => {
+      mergeMap(({ userId }) => {
         const keyPair = this.cryptService.createKeyPair();
 
         return this.chatService
           .createChat({
             name: '',
-            memberIds,
+            memberIds: [userId],
             creatorPublicKey: keyPair.publicKey,
           })
           .pipe(

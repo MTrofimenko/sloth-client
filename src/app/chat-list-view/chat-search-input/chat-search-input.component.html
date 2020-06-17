@@ -1,6 +1,19 @@
 <div class="input-group">
-    <input type="text" class="form-control round-input mr-2 search" placeholder="Enter for search...">
-    <div class="input-group-append">
-        <button class="new-btn" (click)="createChat()">+</button>
-    </div>
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="data$ | async" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+      (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate" placeHolder="Enter for search...">
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+      <div class="p-2">
+        <span>{{item.firstName}} {{item.lastName}}</span>
+      </div>
+
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
 </div>

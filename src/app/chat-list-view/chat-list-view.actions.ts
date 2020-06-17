@@ -9,7 +9,7 @@ export const requestChats = createAction(
 
 export const createChat = createAction(
   '[Chat/API] Create Chat',
-  props<{ name: string, memberIds: string[] }>()
+  props<{ userId: string }>()
 );
 
 export const saveChatKeys = createAction(
