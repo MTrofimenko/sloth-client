@@ -20,14 +20,20 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)/dist'
+    rootFolderOrFile: '$(Build.DefaultWorkingDirectory)/dist' 
     includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.BinariesDirectory)/result/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    archiveType: 'zip' # Options: zip, 7z, tar, wim
+    tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    replaceExistingArchive: true 
 
-# Publish Artifacts
-- publish: 'result'
-  artifact: 'result'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(1bfaaa47-f143-44e5-b776-b6d2409f77d2)'
+    appType: 'webApp'
+    appName: 'sloth-client'
+    package: '$(System.ArtifactStagingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
