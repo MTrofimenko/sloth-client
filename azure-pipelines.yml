@@ -21,13 +21,6 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: 'dist/sloth-client'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: 'dist/res/$(Build.BuildId).zip'
-    replaceExistingArchive: true
 # Publish Artifacts
-- publish: 'dist/res'
+- publish: 'dist/sloth-client'
   artifact: 'dist'
