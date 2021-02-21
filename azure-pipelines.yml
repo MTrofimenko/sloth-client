@@ -29,5 +29,5 @@ steps:
     archiveFile: 'dist/res/$(Build.BuildId).zip'
     replaceExistingArchive: true
 # Publish Artifacts
-- publish: 'dist/sloth-client'
+- publish: 'dist/res'
   artifact: 'dist'
