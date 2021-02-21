@@ -35,5 +35,5 @@ steps:
     azureSubscription: 'Azure subscription 1(1bfaaa47-f143-44e5-b776-b6d2409f77d2)'
     appType: 'webApp'
     appName: 'sloth-client'
-    package: '$(System.ArtifactStagingDirectory)/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
